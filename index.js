@@ -3,7 +3,8 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 5001;
 const errorHandler=require("./middlewares/errorHandler");
-
+const dbConnect = require("./Config/userConfig");
+dbConnect();
 app.use(express.json());
 app.use("/api/auth/",require("./routers/userRoute"));
 
