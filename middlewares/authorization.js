@@ -28,3 +28,5 @@ const validate = asyncHandler(async(req,res,next)=>{
         throw new Error("No tocken provided")
     }
 })
+
+module.exports=validate;
