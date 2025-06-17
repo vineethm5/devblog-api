@@ -1,9 +1,10 @@
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
 
-const validate = asyncHandler(async(req,res,next)=>{
+const validateTocken = asyncHandler(async(req,res,next)=>{
 
     const authheader =  req.headers.authorization || req.headers.Authorization;
+    // console.log(authheader);
     if(authheader && authheader.startsWith("Bearer "))
     {
         let tocken = authheader.split(" ")[1];
@@ -19,14 +20,17 @@ const validate = asyncHandler(async(req,res,next)=>{
                     return res.status(403).json({message:"Unauthorized"});
                 }
             }
+            else{
+   
             req.user = decoded
             next();
+            }
         });
     }
     else{
         res.status(401)
         throw new Error("No tocken provided")
     }
-})
+});
 
-module.exports=validate;
+module.exports= validateTocken;

@@ -46,16 +46,7 @@ else{
 
 
 const userinfo = asyncHandler(async(req,res)=>{ 
-    const userin = await User.findAll();
-    console.log(userin);
-    if(userin)
-    {
-        res.status(200).json({userin})
-    }
-    else
-    {
-        res.status(404).json({message:"no users found"})
-    }
+   res.status(200).json({msg:req.user})
 })
 
 module.exports = {signup,login,userinfo}
