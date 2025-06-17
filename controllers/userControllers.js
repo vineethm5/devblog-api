@@ -29,7 +29,7 @@ const login = asyncHandler(async(req,res)=>{
 const {useremail,username,password} = req.body;
 const isfound = await User.findOne({useremail});
 
-
+// console.log(isfound);
 if(isfound && await bycrpt.compare(password,isfound.password))
 {
     const tocken =  jwt.sign({
@@ -44,4 +44,18 @@ else{
 }
 })
 
-module.exports = {signup,login}
+
+const userinfo = asyncHandler(async(req,res)=>{ 
+    const userin = await User.findAll();
+    console.log(userin);
+    if(userin)
+    {
+        res.status(200).json({userin})
+    }
+    else
+    {
+        res.status(404).json({message:"no users found"})
+    }
+})
+
+module.exports = {signup,login,userinfo}
