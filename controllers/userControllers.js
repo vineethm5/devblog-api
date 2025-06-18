@@ -36,7 +36,7 @@ if(isfound && await bycrpt.compare(password,isfound.password))
     useremail:isfound.useremail,
     username: isfound.username,
     id:isfound.id
-    },process.env.ACCESS_TOKEN_SECRET,{expiresIn:"10m"})
+    },process.env.ACCESS_TOKEN_SECRET,{expiresIn:"1m"})
     res.status(200).json({message:"Login Successfull",tocken:tocken})
 }
 else{

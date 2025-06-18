@@ -7,6 +7,7 @@ const dbConnect = require("./Config/userConfig");
 dbConnect();
 app.use(express.json());
 app.use("/api/auth/",require("./routers/userRoute"));
+app.use("/api/blogs",require("./routers/blogRoutes"));
 
 app.use(errorHandler);
 
