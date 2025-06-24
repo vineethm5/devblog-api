@@ -39,18 +39,33 @@ const allblogs = asyncHandler(async(req,res)=>{
 })
 
 const getblogs = asyncHandler(async(req,res)=>{
-    const userid = req.params.id;
-    const isfound = await blog.findById({user_id:userid})
+    const blogid = req.params.id;
+    // console.log(blogid);
+    const isfound = await blog.findById(blogid)
+    // console.log(isfound);
     if(!isfound)
     {
         res.status(401).json({message:"User Unauthorized"})
     }
     else
     {
-        console.log(isfound);
+        res.status(200).send(isfound)
     }          
+})
+
+const updateblog = asyncHandler(async(req,res)=>{
+    const isavail = await blog.find(req.params.id)
+    if(!isavail)
+    {
+        res.status(400).json({menubar:"blog not available"})
+    }
+    const updating = await blog.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {new:true}
+    )
 })
 
 
 
-module.exports = {createBlogs, allblogs, getblogs};
+module.exports = {createBlogs, allblogs, getblogs,updateblog};
