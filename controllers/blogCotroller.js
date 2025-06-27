@@ -66,6 +66,20 @@ const updateblog = asyncHandler(async(req,res)=>{
     )
 })
 
+const deleteblog = asyncHandler(async(req,res)=>{
+    console.log("test")
+    const isavail = await blog.findById(req.params.id)
+    console.log(isavail)
+    if(!isavail)
+    {
+        res.status(400).json({message:"blog not available"})
+    }
+    console.log(isavail);
+    const dele= await isavail.deleteOne()
+    if(dele)
+    {
+        res.status(200).json({message:"deleted Successfully"})
+    }
+})
 
-
-module.exports = {createBlogs, allblogs, getblogs,updateblog};
+module.exports = {createBlogs, allblogs, getblogs,updateblog,deleteblog};
