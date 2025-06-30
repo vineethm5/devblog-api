@@ -1,15 +1,16 @@
 const asyncHandler = require("express-async-handler");
 const Comment_sc = require("../models/commentschema");
 const add_comment = asyncHandler(async(req,res)=>{
-    const {comment} = req.body
+    const {comment} = req.body;
 
-    const add_com = await Comment_sc({
+    // console.log(comment)
+    const add_com = await Comment_sc.create({
         blog_id:req.params.id,
         author_id:req.user.id,
-        content:comment
+        content:comment.trim()
     });
 
-    console.log()
+    console.log(add_com);
     if(add_com)
     {
         res.status(200).json({message:"Commented Successfully"})
