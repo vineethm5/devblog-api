@@ -10,7 +10,7 @@ const add_comment = asyncHandler(async(req,res)=>{
         content:comment.trim()
     });
 
-    console.log(add_com);
+    // console.log(add_com);s
     if(add_com)
     {
         res.status(200).json({message:"Commented Successfully"})
@@ -21,4 +21,22 @@ const add_comment = asyncHandler(async(req,res)=>{
     }
 });
 
-module.exports = {add_comment};
+
+const view_comments = asyncHandler(async(req,res)=>{
+
+    const get_comm = await Comment_sc.find({blog_id:req.params.id});
+
+    if(!get_comm)
+    {
+        res.status(400).json({message:"No Comments on this blog"})
+    }
+    else
+    {
+        res.status(200).json({get_comm});
+    }
+
+
+
+})
+
+module.exports = {add_comment,view_comments};
