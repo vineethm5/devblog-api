@@ -31,11 +31,37 @@ const createBlogs = asyncHandler(async(req,res)=>{
     
 })
 
+
+
+// localhost:5000/api/blogs/?tag=mysql&authors=vishnu M
 const allblogs = asyncHandler(async(req,res)=>{
+    // const blogs = await blog.find({user_id: req.user.id}).sort({createdAt: -1})
+    const {tag,authors} = req.query;
+    filter = {user_id:req.user.id}
+    if(tag)
+    {
+        filter.tags = {$in :[tag]}
+    }
+    if(authors)
+    {
+        filter.author = {$in : [authors]}
+    }
 
-    const blogs = await blog.find({user_id: req.user.id}).sort({createdAt: -1});
-    res.status(200).json(blogs);
+    console.log(filter)
 
+    // Only include blogs where the tags array contains the given tag.
+    // $in: [tag] means: match if tag exists in the tags array.
+
+    const is_avail = await blog.find(filter);
+    if(is_avail)
+    {
+        res.status(200).json(is_avail);
+    }
+    else
+    {
+
+        res.status(400).json({message:"No blogs found"});
+    }
 })
 
 const getblogs = asyncHandler(async(req,res)=>{
@@ -81,5 +107,10 @@ const deleteblog = asyncHandler(async(req,res)=>{
         res.status(200).json({message:"deleted Successfully"})
     }
 })
+
+
+
+
+
 
 module.exports = {createBlogs, allblogs, getblogs,updateblog,deleteblog};

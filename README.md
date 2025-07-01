@@ -64,7 +64,6 @@ ________________________________________
 🔍 Filters & Query Examples
 •	/api/blogs?tag=nodejs
 •	/api/blogs?author=vineeth&sort=createdAt
-•	/api/blogs?page=2&limit=5
 ________________________________________
 🧪 Example Blog Schema
 {
