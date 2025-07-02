@@ -110,7 +110,18 @@ const deleteblog = asyncHandler(async(req,res)=>{
 
 
 
+const uploadd = (req,res)=>
+{
+    if(!req.file)
+    {
+        res.status(400).json({message:"No file uploaded"})
+    }
+    else
+    {
+        res.status(200).json({message:"uploaded Successfully",file:req.file})
+    }
+
+}
 
 
-
-module.exports = {createBlogs, allblogs, getblogs,updateblog,deleteblog};
+module.exports = {createBlogs, allblogs, getblogs,updateblog,deleteblog,uploadd};

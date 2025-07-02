@@ -11,6 +11,7 @@ app.use("/api/blogs/",require("./routers/blogRoutes"));
 
 app.use(errorHandler);
 
+app.use("uploads/",express.static("uploads"));
 
 app.listen(PORT,(err)=>{
 if(!err)
